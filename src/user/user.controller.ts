@@ -35,7 +35,8 @@ export class UserController {
     description: 'Send mail and password to register new user',
   })
   create(@Body() createUserDto: CreateUserDto, @Res() res: ExpressResponse) {
-    return this.userService.create(createUserDto, res);
+    // return this.userService.create(createUserDto, res);
+    return {route: 'POST: /user/register'}
   }
 
   @Post('/login')
@@ -44,7 +45,8 @@ export class UserController {
     description: 'Send mail and password to validate user',
   })
   login(@Body() loginUser: LoginUserDto, @Res() res: ExpressResponse) {
-    return this.userService.login(loginUser, res);
+    // return this.userService.login(loginUser, res);
+    return {route: 'POST: /user/login'}
   }
 
   @Get('/logout')
@@ -54,7 +56,8 @@ export class UserController {
     description: 'Logout user and remove tokens',
   })
   async logout(@Req() req: ExpressRequest, @Res() res: ExpressResponse) {
-    return this.userService.logout(req.cookies, res);
+    // return this.userService.logout(req.cookies, res);
+    return {route: 'GET: /user/logout'}
   }
 
   @Get('/autologin')
@@ -63,26 +66,20 @@ export class UserController {
     description: 'Use cookies to validate user',
   })
   async autologin(@Req() req: ExpressRequest, @Res() res: ExpressResponse) {
-    // console.log('X', req.cookies);
-    return this.userService.autologin(req.cookies, res);
-  }
-
-  @UseGuards(JwtAuthGuard)
-  @Get('/test-jwt')
-  testJwt() {
-    return { success: 'jwt works' };
+    // return this.userService.autologin(req.cookies, res);
+    return {route: 'GET: /user/autologin'}
   }
 
   @UseGuards(JwtCookieAuthGuard)
   @Get('/test-cookie')
   testCookie(@Req() req: ExpressRequest) {
-    console.log(req.cookies);
-    return { success: 'jwt works', cookies: req.cookies };
+    // return { success: 'jwt works', cookies: req.cookies };
+    return {route: 'GET: /user/test-cookie'}
   }
 
   @Get('')
   findAll() {
-    return this.userService.findAll();
+    return this.userService.findAll()
   }
 
   @Get(':id')
