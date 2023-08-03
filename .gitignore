@@ -37,3 +37,5 @@ lerna-debug.log*
 .env
 
 /src/migration
+yarn.lock
+pm2.json
